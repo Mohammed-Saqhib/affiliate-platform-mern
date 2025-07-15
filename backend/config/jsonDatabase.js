@@ -1,6 +1,59 @@
 const fs = require('fs');
 const path = require('path');
 
+// Check if we're in a Vercel serverless environment
+const isProduction = process.env.VERCEL || process.env.NODE_ENV === 'production';
+
+if (isProduction) {
+    // Use in-memory database for production/Vercel
+    const productionDB = require('./productionDatabase');
+    
+    // Export production database instances
+    module.exports = {
+        usersDB: {
+            readAll: () => productionDB.findAll('users'),
+            writeAll: (data) => { /* Read-only in production */ },
+            findById: (id) => productionDB.findById('users', id),
+            findOne: (criteria) => productionDB.findOne('users', criteria),
+            create: (data) => productionDB.create('users', data),
+            updateById: (id, data) => productionDB.updateById('users', id, data),
+            deleteById: (id) => productionDB.deleteById('users', id),
+            count: (criteria) => productionDB.count('users', criteria)
+        },
+        productsDB: {
+            readAll: () => productionDB.findAll('products'),
+            writeAll: (data) => { /* Read-only in production */ },
+            findById: (id) => productionDB.findById('products', id),
+            findOne: (criteria) => productionDB.findOne('products', criteria),
+            create: (data) => productionDB.create('products', data),
+            updateById: (id, data) => productionDB.updateById('products', id, data),
+            deleteById: (id) => productionDB.deleteById('products', id),
+            count: (criteria) => productionDB.count('products', criteria)
+        },
+        affiliateLinksDB: {
+            readAll: () => productionDB.findAll('affiliateLinks'),
+            writeAll: (data) => { /* Read-only in production */ },
+            findById: (id) => productionDB.findById('affiliateLinks', id),
+            findOne: (criteria) => productionDB.findOne('affiliateLinks', criteria),
+            create: (data) => productionDB.create('affiliateLinks', data),
+            updateById: (id, data) => productionDB.updateById('affiliateLinks', id, data),
+            deleteById: (id) => productionDB.deleteById('affiliateLinks', id),
+            count: (criteria) => productionDB.count('affiliateLinks', criteria)
+        },
+        transactionsDB: {
+            readAll: () => productionDB.findAll('transactions'),
+            writeAll: (data) => { /* Read-only in production */ },
+            findById: (id) => productionDB.findById('transactions', id),
+            findOne: (criteria) => productionDB.findOne('transactions', criteria),
+            create: (data) => productionDB.create('transactions', data),
+            updateById: (id, data) => productionDB.updateById('transactions', id, data),
+            deleteById: (id) => productionDB.deleteById('transactions', id),
+            count: (criteria) => productionDB.count('transactions', criteria)
+        }
+    };
+} else {
+    // Use file-based database for development
+
 // File paths for JSON databases
 const dbDir = path.join(__dirname, '../data');
 const usersFile = path.join(dbDir, 'users.json');
@@ -164,3 +217,5 @@ module.exports = {
     transactionsDB,
     JSONDatabase
 };
+
+}

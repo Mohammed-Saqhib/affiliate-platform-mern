@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const AdminDashboardScreen = () => {
     const [products, setProducts] = useState([]);
@@ -28,8 +29,8 @@ const AdminDashboardScreen = () => {
         try {
             setLoading(true);
             const [productsRes, transactionsRes] = await Promise.all([
-                axios.get('http://localhost:5000/api/products', config),
-                axios.get('http://localhost:5000/api/affiliate/transactions', config)
+                axios.get(`${API_BASE_URL}/products`, config),
+                axios.get(`${API_BASE_URL}/affiliate/transactions`, config)
             ]);
 
             setProducts(productsRes.data);
@@ -53,7 +54,7 @@ const AdminDashboardScreen = () => {
         e.preventDefault();
         setSubmitLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/products', {
+            await axios.post(`${API_BASE_URL}/products`, {
                 ...newProduct,
                 price: parseFloat(newProduct.price)
             }, config);
@@ -70,7 +71,7 @@ const AdminDashboardScreen = () => {
     const handleDeleteProduct = async (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+                await axios.delete(`${API_BASE_URL}/products/${id}`, config);
                 fetchAllData();
                 alert('Product deleted!');
             } catch (err) {
@@ -91,7 +92,7 @@ const AdminDashboardScreen = () => {
         e.preventDefault();
         setSubmitLoading(true);
         try {
-            await axios.put(`http://localhost:5000/api/products/${editingProduct._id}`, {
+            await axios.put(`${API_BASE_URL}/products/${editingProduct.id}`, {
                 ...editingProduct,
                 price: parseFloat(editingProduct.price)
             }, config);
@@ -108,7 +109,7 @@ const AdminDashboardScreen = () => {
     const handleSimulatePurchase = async (shortCode) => {
         setSimulateLoading(shortCode);
         try {
-            await axios.post('http://localhost:5000/api/affiliate/purchase', { shortCode }, config);
+            await axios.post(`${API_BASE_URL}/affiliate/purchase`, { shortCode }, config);
             fetchAllData();
             alert('Purchase simulated successfully!');
         } catch (err) {
@@ -121,7 +122,7 @@ const AdminDashboardScreen = () => {
     const handleMarkAsPaid = async (transactionId) => {
         if (window.confirm('Mark this transaction as paid?')) {
             try {
-                await axios.put(`http://localhost:5000/api/affiliate/transactions/${transactionId}/pay`, {}, config);
+                await axios.put(`${API_BASE_URL}/affiliate/transactions/${transactionId}/pay`, {}, config);
                 fetchAllData();
                 alert('Transaction marked as paid!');
             } catch (err) {
@@ -283,7 +284,7 @@ const AdminDashboardScreen = () => {
                             </thead>
                             <tbody>
                                 {products.map((product) => (
-                                    <tr key={product._id}>
+                                    <tr key={product.id}>
                                         <td>
                                             <img 
                                                 src={product.imageUrl} 
@@ -318,7 +319,7 @@ const AdminDashboardScreen = () => {
                                                     ✏️ Edit
                                                 </button>
                                                 <button 
-                                                    onClick={() => handleDeleteProduct(product._id)} 
+                                                    onClick={() => handleDeleteProduct(product.id)} 
                                                     className="btn btn-danger"
                                                     style={{ fontSize: '0.8rem', padding: '5px 10px' }}
                                                 >
@@ -451,7 +452,7 @@ const AdminDashboardScreen = () => {
                             </thead>
                             <tbody>
                                 {transactions.map((transaction) => (
-                                    <tr key={transaction._id}>
+                                    <tr key={transaction.id}>
                                         <td>
                                             <strong>{transaction.product?.name || 'N/A'}</strong>
                                         </td>
@@ -495,7 +496,7 @@ const AdminDashboardScreen = () => {
                                             <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
                                                 {transaction.status === 'pending' && (
                                                     <button 
-                                                        onClick={() => handleMarkAsPaid(transaction._id)} 
+                                                        onClick={() => handleMarkAsPaid(transaction.id)} 
                                                         className="btn btn-success"
                                                         style={{ fontSize: '0.8rem', padding: '5px 10px' }}
                                                     >

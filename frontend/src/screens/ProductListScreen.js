@@ -64,7 +64,7 @@ const ProductListScreen = () => {
                     </h2>
                     <div className="grid grid-4">
                         {products.map((product) => (
-                            <div key={product._id} className="card" style={{
+                            <div key={product.id} className="card" style={{
                                 textAlign: 'center',
                                 transition: 'transform 0.3s, box-shadow 0.3s',
                                 cursor: 'pointer'

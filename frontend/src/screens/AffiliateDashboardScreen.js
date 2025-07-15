@@ -56,7 +56,7 @@ const AffiliateDashboardScreen = () => {
                 alert('Affiliate link already exists for this product!');
             } else {
                 // Add new link to state
-                const product = products.find(p => p._id === productId);
+                const product = products.find(p => p.id === productId);
                 setMyLinks(prev => [...prev, { ...data, product }]);
                 alert('Affiliate link generated successfully!');
             }
@@ -145,9 +145,9 @@ const AffiliateDashboardScreen = () => {
                 ) : (
                     <div className="grid grid-3">
                         {products.map((product) => {
-                            const hasLink = myLinks.some(link => link.product?._id === product._id);
+                            const hasLink = myLinks.some(link => link.product?.id === product.id);
                             return (
-                                <div key={product._id} style={{
+                                <div key={product.id} style={{
                                     border: '1px solid #ddd',
                                     padding: '20px',
                                     borderRadius: '10px',
@@ -178,12 +178,12 @@ const AffiliateDashboardScreen = () => {
                                         ${product.price.toFixed(2)}
                                     </p>
                                     <button
-                                        onClick={() => generateLinkHandler(product._id)}
+                                        onClick={() => generateLinkHandler(product.id)}
                                         className={hasLink ? "btn btn-success" : "btn btn-primary"}
-                                        disabled={generateLoading === product._id}
+                                        disabled={generateLoading === product.id}
                                         style={{ width: '100%' }}
                                     >
-                                        {generateLoading === product._id ? 
+                                        {generateLoading === product.id ? 
                                             'Generating...' : 
                                             hasLink ? '✅ Link Generated' : '🔗 Generate Link'
                                         }
@@ -219,10 +219,10 @@ const AffiliateDashboardScreen = () => {
                                 {myLinks.map((link) => {
                                     const conversionRate = link.clicks > 0 ? 
                                         ((link.purchases / link.clicks) * 100).toFixed(1) : '0.0';
-                                    const fullLink = `http://localhost:5000/api/affiliate/track/${link.shortCode}`;
+                                    const fullLink = `${window.location.origin}/api/affiliate/track/${link.shortCode}`;
                                     
                                     return (
-                                        <tr key={link._id}>
+                                        <tr key={link.id}>
                                             <td>
                                                 <strong>{link.product?.name || 'N/A'}</strong>
                                                 <br />
@@ -306,7 +306,7 @@ const AffiliateDashboardScreen = () => {
                             </thead>
                             <tbody>
                                 {myTransactions.map((transaction) => (
-                                    <tr key={transaction._id}>
+                                    <tr key={transaction.id}>
                                         <td>
                                             <strong>{transaction.product?.name || 'N/A'}</strong>
                                         </td>
