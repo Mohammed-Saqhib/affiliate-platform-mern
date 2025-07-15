@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 const ProductListScreen = () => {
     const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ const ProductListScreen = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/products');
+                const { data } = await axios.get(`${API_BASE_URL}/products`);
                 setProducts(data);
                 setLoading(false);
             } catch (err) {

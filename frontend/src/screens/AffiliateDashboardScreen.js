@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const AffiliateDashboardScreen = () => {
     const [products, setProducts] = useState([]);
@@ -21,9 +22,9 @@ const AffiliateDashboardScreen = () => {
         try {
             setLoading(true);
             const [productsRes, myLinksRes, myTransactionsRes] = await Promise.all([
-                axios.get('http://localhost:5000/api/products'),
-                axios.get('http://localhost:5000/api/affiliate/my-links', config),
-                axios.get('http://localhost:5000/api/affiliate/my-transactions', config)
+                axios.get(`${API_BASE_URL}/products`),
+                axios.get(`${API_BASE_URL}/affiliate/my-links`, config),
+                axios.get(`${API_BASE_URL}/affiliate/my-transactions`, config)
             ]);
 
             setProducts(productsRes.data);
@@ -44,7 +45,7 @@ const AffiliateDashboardScreen = () => {
         setGenerateLoading(productId);
         try {
             const { data } = await axios.post(
-                'http://localhost:5000/api/affiliate/generate-link', 
+                `${API_BASE_URL}/affiliate/generate-link`, 
                 { productId }, 
                 config
             );
