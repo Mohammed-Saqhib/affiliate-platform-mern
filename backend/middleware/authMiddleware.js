@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+// Fallback secret if not provided in environment
+const JWT_SECRET = process.env.JWT_SECRET || 'affiliate_platform_secret';
+
 const protect = async (req, res, next) => {
     let token;
 
@@ -8,20 +11,24 @@ const protect = async (req, res, next) => {
         try {
             token = req.headers.authorization.split(' ')[1];
 
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-            const user = await User.findById(decoded.id);
-            if (user) {
-                // Remove password from user object
-                const userResponse = { ...user };
-                delete userResponse.password;
-                req.user = userResponse;
-                next();
-            } else {
-                res.status(401).json({ message: 'User not found' });
+            // Verify token
+            const decoded = jwt.verify(token, JWT_SECRET);
+            // Fetch user from database to ensure still valid
+            const user = await User.findByPk(decoded.id);
+            if (!user) {
+                return res.status(401).json({ message: 'User not found' });
             }
+            // Attach user id and role
+            req.user = { id: user.id, role: user.role };
+            return next();
         } catch (error) {
-            console.error('Auth middleware error:', error);
+            console.error('Auth middleware error:', error.message);
+            if (error.name === 'JsonWebTokenError') {
+                return res.status(401).json({ message: 'Invalid token' });
+            }
+            if (error.name === 'TokenExpiredError') {
+                return res.status(401).json({ message: 'Token has expired' });
+            }
             res.status(401).json({ message: 'Not authorized, token failed' });
         }
     } else {

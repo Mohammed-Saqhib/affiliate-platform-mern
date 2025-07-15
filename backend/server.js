@@ -10,10 +10,11 @@ const PORT = process.env.PORT || 5000;
 // Enhanced CORS configuration
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
-        ? ['https://affiliate-platform-mern.onrender.com'] 
+        ? [process.env.FRONTEND_URL || 'https://affiliate-platform-mern.onrender.com'] 
         : ['http://localhost:3000'],
     credentials: true,
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 // Middleware

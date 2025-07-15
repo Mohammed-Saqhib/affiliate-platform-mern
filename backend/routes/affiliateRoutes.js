@@ -1,5 +1,8 @@
 const express = require('express');
-const { User, Product, AffiliateLink, Transaction } = require('../models');
+const User = require('../models/User');
+const Product = require('../models/Product');
+const AffiliateLink = require('../models/AffiliateLink');
+const Transaction = require('../models/Transaction');
 const { protect, authorizeRoles } = require('../middleware/authMiddleware');
 
 const router = express.Router();
