@@ -61,14 +61,14 @@ router.put('/:id', protect, authorizeRoles('admin'), async (req, res) => {
         const product = await Product.findByPk(req.params.id);
 
         if (product) {
-            await product.update({
+            const updatedProduct = await Product.updateByPk(req.params.id, {
                 name: name || product.name,
                 description: description || product.description,
                 price: price || product.price,
                 imageUrl: imageUrl || product.imageUrl,
             });
             
-            res.json(product);
+            res.json(updatedProduct);
         } else {
             res.status(404).json({ message: 'Product not found' });
         }
@@ -85,7 +85,7 @@ router.delete('/:id', protect, authorizeRoles('admin'), async (req, res) => {
         const product = await Product.findByPk(req.params.id);
 
         if (product) {
-            await product.destroy();
+            await Product.deleteByPk(req.params.id);
             res.json({ message: 'Product removed' });
         } else {
             res.status(404).json({ message: 'Product not found' });

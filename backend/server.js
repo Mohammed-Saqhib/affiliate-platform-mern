@@ -14,6 +14,17 @@ app.use(cors()); // Enable CORS for all origins (for development)
 console.log('Using JSON file-based database...');
 console.log('Database files will be stored in: ./data/ directory');
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'OK',
+        message: 'Affiliate Platform API is running!',
+        database: 'JSON File-based Database',
+        environment: process.env.NODE_ENV || 'development',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Routes (API routes must come before static files)
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));

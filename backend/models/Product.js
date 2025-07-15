@@ -36,7 +36,16 @@ class Product {
   }
 
   static findAll(criteria = {}) {
-    return productsDB.findAll(criteria);
+    const allProducts = productsDB.readAll();
+    if (Object.keys(criteria).length === 0) {
+      return allProducts;
+    }
+    
+    return allProducts.filter(product => {
+      return Object.keys(criteria).every(key => {
+        return product[key] === criteria[key];
+      });
+    });
   }
 
   static updateByPk(id, updateData) {
