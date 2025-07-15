@@ -119,8 +119,8 @@ const LoginScreen = () => {
                 fontSize: '0.8rem'
             }}>
                 <h4 style={{ margin: '0 0 10px 0', fontSize: '0.9rem' }}>Demo Credentials:</h4>
-                <p style={{ margin: '5px 0' }}><strong>Admin:</strong> admin@demo.com / admin123</p>
-                <p style={{ margin: '5px 0' }}><strong>User:</strong> user@demo.com / user123</p>
+                <p style={{ margin: '5px 0' }}><strong>Admin:</strong> admin@example.com / admin123</p>
+                <p style={{ margin: '5px 0' }}><strong>User:</strong> test2@example.com / test123</p>
             </div>
         </div>
     );
