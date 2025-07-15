@@ -4,9 +4,7 @@
   "description": "MERN Stack Affiliate Platform",
   "main": "api/index.js",
   "scripts": {
-    "build": "node build.js",
-    "build:backend": "cd backend && npm install --production --no-optional",
-    "build:frontend": "cd frontend && npm install --no-optional && npm run build:ci",
+    "build": "cd backend && npm install --production && cd ../frontend && npm install && node ./node_modules/react-scripts/bin/react-scripts.js build",
     "start": "node backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
@@ -19,7 +17,8 @@
     "dotenv": "^16.1.4",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "cross-env": "^7.0.3"
   },
   "engines": {
     "node": ">=18.0.0"
