@@ -1,0 +1,38 @@
+[
+  {
+    "affiliateLinkId": "md4wkoxovmhhdjzja4",
+    "productId": "md4wkoxlwvrska46xtk",
+    "affiliateId": "md4wkovovqcz760j37b",
+    "amount": 99.99,
+    "commissionEarned": 15,
+    "status": "paid",
+    "purchasedAt": "2025-07-14T19:05:58.333Z",
+    "id": "md4wkoxqyur42h67cjb",
+    "createdAt": "2025-07-15T19:05:58.334Z",
+    "updatedAt": "2025-07-15T19:05:58.334Z"
+  },
+  {
+    "affiliateLinkId": "md4wkoxoi2dbda32f7k",
+    "productId": "md4wkoxm4dp9b23v7lw",
+    "affiliateId": "md4wkovovqcz760j37b",
+    "amount": 199.99,
+    "commissionEarned": 50,
+    "status": "pending",
+    "purchasedAt": "2025-07-15T07:05:58.334Z",
+    "id": "md4wkoxqmkbldo4jy1",
+    "createdAt": "2025-07-15T19:05:58.334Z",
+    "updatedAt": "2025-07-15T19:05:58.334Z"
+  },
+  {
+    "affiliateLinkId": "md4wkoxpq9x1ug99xfk",
+    "productId": "md4wkoxmwf7cjqlbv9q",
+    "affiliateId": "md4wkoxk0rl2ko11ptzi",
+    "amount": 49.99,
+    "commissionEarned": 8,
+    "status": "paid",
+    "purchasedAt": "2025-07-13T19:05:58.334Z",
+    "id": "md4wkoxqa8um6m53k8e",
+    "createdAt": "2025-07-15T19:05:58.334Z",
+    "updatedAt": "2025-07-15T19:05:58.334Z"
+  }
+]

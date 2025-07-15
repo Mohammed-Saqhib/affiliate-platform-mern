@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const { connectDB } = require('../backend/config/database');
 
 const app = express();
 
@@ -9,27 +9,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// MongoDB Connection
-let isConnected = false;
-
-const connectDB = async () => {
-  if (isConnected) {
-    return;
-  }
-  
-  try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/affiliate_db';
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    isConnected = true;
-    console.log('MongoDB Connected Successfully!');
-  } catch (err) {
-    console.error('MongoDB connection error:', err);
-    throw err;
-  }
-};
+// Initialize SQLite Database
+console.log('Using SQLite file-based database...');
+console.log('Database file will be stored in project root as: database.sqlite');
 
 // Connect to database
 connectDB();
@@ -38,6 +20,8 @@ connectDB();
 app.get('/api', (req, res) => {
     res.json({ 
         message: 'Affiliate Platform API is running on Vercel!',
+        database: 'SQLite File-based Database',
+        status: 'Connected',
         timestamp: new Date().toISOString(),
         routes: [
             'GET /api - This endpoint',

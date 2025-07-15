@@ -1,0 +1,42 @@
+[
+  {
+    "username": "admin",
+    "email": "admin@example.com",
+    "password": "$2b$10$/8XEYhVZ.l/uYzc9zFniw.GDTmlHtHab1PvV59EtrAqljvgQO.0Yu",
+    "role": "admin",
+    "isActive": true,
+    "id": "md4wkotnnf4bb3lgwxh",
+    "createdAt": "2025-07-15T19:05:58.187Z",
+    "updatedAt": "2025-07-15T19:05:58.187Z"
+  },
+  {
+    "username": "affiliate1",
+    "email": "affiliate1@example.com",
+    "password": "$2b$10$mw.KOtgvfbTAJsOtkP7Di.1H69h2urFTi7Gq8x/YIAiNn6zsOMPcq",
+    "role": "user",
+    "isActive": true,
+    "id": "md4wkovovqcz760j37b",
+    "createdAt": "2025-07-15T19:05:58.260Z",
+    "updatedAt": "2025-07-15T19:05:58.260Z"
+  },
+  {
+    "username": "affiliate2",
+    "email": "affiliate2@example.com",
+    "password": "$2b$10$hk7i2UnpbYdD47AsYFOpveyiU2dktgVx9bCjXAtpT5pu9LHG.1VCK",
+    "role": "user",
+    "isActive": true,
+    "id": "md4wkoxk0rl2ko11ptzi",
+    "createdAt": "2025-07-15T19:05:58.328Z",
+    "updatedAt": "2025-07-15T19:05:58.328Z"
+  },
+  {
+    "username": "testuser2",
+    "email": "test2@example.com",
+    "password": "$2b$10$taKwi9AP8d3VtZYJ..CVKuLgT9NgEy8HiU.KXqTYxJ3uHrj9q0OW6",
+    "role": "user",
+    "isActive": true,
+    "id": "md4wqv6ll9lt70693zk",
+    "createdAt": "2025-07-15T19:10:46.365Z",
+    "updatedAt": "2025-07-15T19:10:46.365Z"
+  }
+]

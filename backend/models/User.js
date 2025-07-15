@@ -1,44 +1,71 @@
-const mongoose = require('mongoose');
+const { usersDB } = require('../config/jsonDatabase');
 const bcrypt = require('bcryptjs');
 
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    role: {
-        type: String,
-        enum: ['user', 'admin'], // 'user' for affiliate, 'admin' for product management
-        default: 'user',
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
-
-// Hash password before saving
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) {
-        next();
+class User {
+  static async create(userData) {
+    // Validate required fields
+    if (!userData.username || !userData.email || !userData.password) {
+      throw new Error('Username, email, and password are required');
     }
+
+    // Check if user already exists
+    const existingUser = usersDB.findOne({ email: userData.email });
+    if (existingUser) {
+      throw new Error('User with this email already exists');
+    }
+
+    const existingUsername = usersDB.findOne({ username: userData.username });
+    if (existingUsername) {
+      throw new Error('Username already taken');
+    }
+
+    // Hash password
     const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-});
+    const hashedPassword = await bcrypt.hash(userData.password, salt);
 
-// Compare password method
-userSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password);
-};
+    // Create user object
+    const user = {
+      username: userData.username,
+      email: userData.email,
+      password: hashedPassword,
+      role: userData.role || 'user',
+      isActive: userData.isActive !== undefined ? userData.isActive : true
+    };
 
-module.exports = mongoose.model('User', userSchema);
+    return usersDB.create(user);
+  }
+
+  static findOne(criteria) {
+    return usersDB.findOne(criteria);
+  }
+
+  static findByPk(id) {
+    return usersDB.findById(id);
+  }
+
+  static findAll(criteria = {}) {
+    return usersDB.findAll(criteria);
+  }
+
+  static async updateByPk(id, updateData) {
+    if (updateData.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(updateData.password, salt);
+    }
+    return usersDB.updateById(id, updateData);
+  }
+
+  static deleteByPk(id) {
+    return usersDB.deleteById(id);
+  }
+
+  static async comparePassword(user, candidatePassword) {
+    return bcrypt.compare(candidatePassword, user.password);
+  }
+
+  static count(criteria = {}) {
+    return usersDB.count(criteria);
+  }
+}
+
+module.exports = User;

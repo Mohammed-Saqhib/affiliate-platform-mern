@@ -28,7 +28,7 @@ router.post('/', protect, authorizeRoles('admin'), async (req, res) => {
 // @access  Public
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.find({});
+        const products = await Product.findAll();
         res.json(products);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/:id', async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findByPk(req.params.id);
         if (product) {
             res.json(product);
         } else {
@@ -58,16 +58,17 @@ router.put('/:id', protect, authorizeRoles('admin'), async (req, res) => {
     const { name, description, price, imageUrl } = req.body;
 
     try {
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findByPk(req.params.id);
 
         if (product) {
-            product.name = name || product.name;
-            product.description = description || product.description;
-            product.price = price || product.price;
-            product.imageUrl = imageUrl || product.imageUrl;
-
-            const updatedProduct = await product.save();
-            res.json(updatedProduct);
+            await product.update({
+                name: name || product.name,
+                description: description || product.description,
+                price: price || product.price,
+                imageUrl: imageUrl || product.imageUrl,
+            });
+            
+            res.json(product);
         } else {
             res.status(404).json({ message: 'Product not found' });
         }
@@ -81,9 +82,10 @@ router.put('/:id', protect, authorizeRoles('admin'), async (req, res) => {
 // @access  Private/Admin
 router.delete('/:id', protect, authorizeRoles('admin'), async (req, res) => {
     try {
-        const product = await Product.findByIdAndDelete(req.params.id);
+        const product = await Product.findByPk(req.params.id);
 
         if (product) {
+            await product.destroy();
             res.json({ message: 'Product removed' });
         } else {
             res.status(404).json({ message: 'Product not found' });

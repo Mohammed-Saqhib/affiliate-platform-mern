@@ -32,12 +32,13 @@ router.post('/register', async (req, res) => {
             role: role || 'user', // Default to 'user' if not specified
         });
 
+        // Remove password from response
+        const userResponse = { ...user };
+        delete userResponse.password;
+
         res.status(201).json({
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            role: user.role,
-            token: generateToken(user._id),
+            ...userResponse,
+            token: generateToken(user.id),
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -53,13 +54,14 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email });
 
-        if (user && (await user.matchPassword(password))) {
+        if (user && (await User.comparePassword(user, password))) {
+            // Remove password from response
+            const userResponse = { ...user };
+            delete userResponse.password;
+            
             res.json({
-                _id: user._id,
-                username: user.username,
-                email: user.email,
-                role: user.role,
-                token: generateToken(user._id),
+                ...userResponse,
+                token: generateToken(user.id),
             });
         } else {
             res.status(401).json({ message: 'Invalid email or password' });

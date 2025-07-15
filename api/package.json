@@ -4,11 +4,12 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^7.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "sequelize": "^6.32.1",
+    "sqlite3": "^5.1.6"
   }
 }

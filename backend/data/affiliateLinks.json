@@ -1,0 +1,38 @@
+[
+  {
+    "shortCode": "Ree7aOtvI",
+    "productId": "md4wkoxlwvrska46xtk",
+    "affiliateId": "md4wkovovqcz760j37b",
+    "clicks": 45,
+    "purchases": 3,
+    "commissionRate": 0.15,
+    "isActive": true,
+    "id": "md4wkoxovmhhdjzja4",
+    "createdAt": "2025-07-15T19:05:58.332Z",
+    "updatedAt": "2025-07-15T19:05:58.332Z"
+  },
+  {
+    "shortCode": "b4O1qliRwo",
+    "productId": "md4wkoxm4dp9b23v7lw",
+    "affiliateId": "md4wkovovqcz760j37b",
+    "clicks": 32,
+    "purchases": 2,
+    "commissionRate": 0.25,
+    "isActive": true,
+    "id": "md4wkoxoi2dbda32f7k",
+    "createdAt": "2025-07-15T19:05:58.332Z",
+    "updatedAt": "2025-07-15T19:05:58.332Z"
+  },
+  {
+    "shortCode": "0ObVtnEWvD",
+    "productId": "md4wkoxmwf7cjqlbv9q",
+    "affiliateId": "md4wkoxk0rl2ko11ptzi",
+    "clicks": 28,
+    "purchases": 4,
+    "commissionRate": 0.16,
+    "isActive": true,
+    "id": "md4wkoxpq9x1ug99xfk",
+    "createdAt": "2025-07-15T19:05:58.333Z",
+    "updatedAt": "2025-07-15T19:05:58.333Z"
+  }
+]

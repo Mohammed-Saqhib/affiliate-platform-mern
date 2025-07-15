@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Wireless Bluetooth Headphones",
+    "description": "High-quality wireless headphones with noise cancellation",
+    "price": 99.99,
+    "commission": 15,
+    "imageUrl": "https://via.placeholder.com/300x300/007bff/ffffff?text=Headphones",
+    "category": "Electronics",
+    "isActive": true,
+    "id": "md4wkoxlwvrska46xtk",
+    "createdAt": "2025-07-15T19:05:58.329Z",
+    "updatedAt": "2025-07-15T19:05:58.329Z"
+  },
+  {
+    "name": "Smart Fitness Watch",
+    "description": "Track your fitness goals with this advanced smartwatch",
+    "price": 199.99,
+    "commission": 25,
+    "imageUrl": "https://via.placeholder.com/300x300/28a745/ffffff?text=Smart+Watch",
+    "category": "Fitness",
+    "isActive": true,
+    "id": "md4wkoxm4dp9b23v7lw",
+    "createdAt": "2025-07-15T19:05:58.330Z",
+    "updatedAt": "2025-07-15T19:05:58.330Z"
+  },
+  {
+    "name": "Portable Laptop Stand",
+    "description": "Ergonomic laptop stand for better posture and productivity",
+    "price": 49.99,
+    "commission": 8,
+    "imageUrl": "https://via.placeholder.com/300x300/ffc107/000000?text=Laptop+Stand",
+    "category": "Accessories",
+    "isActive": true,
+    "id": "md4wkoxmwf7cjqlbv9q",
+    "createdAt": "2025-07-15T19:05:58.330Z",
+    "updatedAt": "2025-07-15T19:05:58.330Z"
+  }
+]
