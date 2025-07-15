@@ -4,11 +4,12 @@
   "description": "MERN Stack Affiliate Platform",
   "main": "api/index.js",
   "scripts": {
-    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build:ci",
+    "build": "cd backend && npm install --only=production && cd ../frontend && npm install && CI=true npm run build",
     "start": "node backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
-    "client": "cd frontend && npm start"
+    "client": "cd frontend && npm start",
+    "postbuild": "echo 'Build completed successfully'"
   },
   "dependencies": {
     "express": "^4.18.2",

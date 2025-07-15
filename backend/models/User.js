@@ -63,6 +63,11 @@ class User {
     return bcrypt.compare(candidatePassword, user.password);
   }
 
+  // Instance method for comparing password
+  comparePassword(candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+  }
+
   static count(criteria = {}) {
     return usersDB.count(criteria);
   }
