@@ -4,6 +4,7 @@
   "description": "MERN Stack Affiliate Platform",
   "main": "api/index.js",
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "node backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
