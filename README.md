@@ -237,9 +237,7 @@ The project is structured for easy deployment:
 - Mobile app development
 - Advanced affiliate tiers and bonuses
 
-## 🤝 Contributing
 
-This is a college project, but suggestions and improvements are welcome!
 
 ## 📄 License
 
